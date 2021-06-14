@@ -1,0 +1,46 @@
+enum AnneeEtude {
+  DCEM1,
+  DCEM2,
+  DCEM3
+}
+
+enum Hopital {
+	CharlesNicoles("Charles Nicole")
+}
+
+entity StageRadiologie {
+	id Long,
+    anneeEtude AnneeEtude required,
+	dateDebut Instant,
+	dateFin Instant,
+    hopital Hopital required,
+    chefService String,
+    semestre String,
+    groupe String,
+    specialite String,
+    objectif1 String,
+    objectif1Enseigne String,
+    isObjectif1Evalue Boolean,
+    noteObjectif1 Integer,
+    evaluationObjectifParObjectif Integer,
+    evaluationRedactionObservation Integer,
+    evaluationElaborationResume Integer,
+    evaluationAttitudeAssiduite Integer,
+    evaludationValidationGarde Integer,
+    evaluationPeriodique Integer,
+    ECOSM Integer,
+    total Integer,
+    isAbsenceSup10pc Boolean,
+    isValide Boolean,
+    dureeStageComplEnSemaine Integer,
+    dateDebutStageCompl Instant,
+    dateFinStageCompl Instant,
+    isStageComplValide Boolean
+}
+
+relationship ManyToOne {
+  StageRadiologie{user(login)} to User
+}
+
+// Set pagination options
+paginate Stage with pagination
