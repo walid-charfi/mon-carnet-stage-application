@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <!--
+        Added the entity StageRadiologie.
+    -->
+    <changeSet id="20210614223119-1" author="jhipster">
+        <createTable tableName="stage_radiologie">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="annee_etude" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_debut" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_fin" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="hopital" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="chef_service" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="semestre" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="groupe" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="specialite" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="objectif_1" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="objectif_1_enseigne" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_objectif_1_evalue" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="note_objectif_1" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_objectif_par_objectif" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_redaction_observation" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_elaboration_resume" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_attitude_assiduite" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaludation_validation_garde" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="evaluation_periodique" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="e_cosm" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="total" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_absence_sup_10_pc" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_valide" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="duree_stage_compl_en_semaine" type="integer">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_debut_stage_compl" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="date_fin_stage_compl" type="${datetimeType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="is_stage_compl_valide" type="boolean">
+                <constraints nullable="true" />
+            </column>
+            <column name="user_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here -->
+        </createTable>
+        <dropDefaultValue tableName="stage_radiologie" columnName="date_debut" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="stage_radiologie" columnName="date_fin" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="stage_radiologie" columnName="date_debut_stage_compl" columnDataType="${datetimeType}"/>
+        <dropDefaultValue tableName="stage_radiologie" columnName="date_fin_stage_compl" columnDataType="${datetimeType}"/>
+    </changeSet>
+
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here -->
+
+    <!--
+        Load sample data generated with Faker.js
+        - This data can be easily edited using a CSV editor (or even MS Excel) and
+          is located in the 'src/main/resources/config/liquibase/fake-data' directory
+        - By default this data is applied when running with the JHipster 'dev' profile.
+          This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
+          Spring Boot configuration key.
+    -->
+    <changeSet id="20210614223119-1-data" author="jhipster" context="faker">
+        <loadData
+                  file="config/liquibase/fake-data/stage_radiologie.csv"
+                  separator=";"
+                  tableName="stage_radiologie">
+            <column name="id" type="numeric"/>
+            <column name="annee_etude" type="string"/>
+            <column name="date_debut" type="${datetimeType}"/>
+            <column name="date_fin" type="${datetimeType}"/>
+            <column name="hopital" type="string"/>
+            <column name="chef_service" type="string"/>
+            <column name="semestre" type="string"/>
+            <column name="groupe" type="string"/>
+            <column name="specialite" type="string"/>
+            <column name="objectif_1" type="string"/>
+            <column name="objectif_1_enseigne" type="string"/>
+            <column name="is_objectif_1_evalue" type="boolean"/>
+            <column name="note_objectif_1" type="numeric"/>
+            <column name="evaluation_objectif_par_objectif" type="numeric"/>
+            <column name="evaluation_redaction_observation" type="numeric"/>
+            <column name="evaluation_elaboration_resume" type="numeric"/>
+            <column name="evaluation_attitude_assiduite" type="numeric"/>
+            <column name="evaludation_validation_garde" type="numeric"/>
+            <column name="evaluation_periodique" type="numeric"/>
+            <column name="e_cosm" type="numeric"/>
+            <column name="total" type="numeric"/>
+            <column name="is_absence_sup_10_pc" type="boolean"/>
+            <column name="is_valide" type="boolean"/>
+            <column name="duree_stage_compl_en_semaine" type="numeric"/>
+            <column name="date_debut_stage_compl" type="${datetimeType}"/>
+            <column name="date_fin_stage_compl" type="${datetimeType}"/>
+            <column name="is_stage_compl_valide" type="boolean"/>
+            <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here -->
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

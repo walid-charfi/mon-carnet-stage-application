@@ -1,0 +1,136 @@
+{
+  "name": "StageRadiologie",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "anneeEtude",
+      "fieldType": "AnneeEtude",
+      "fieldValues": "DCEM1,DCEM2,DCEM3",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "hopital",
+      "fieldType": "Hopital",
+      "fieldValues": "CharlesNicoles (Charles Nicole)",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "chefService",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "semestre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "groupe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "specialite",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectif1",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "objectif1Enseigne",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isObjectif1Evalue",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "noteObjectif1",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaluationObjectifParObjectif",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaluationRedactionObservation",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaluationElaborationResume",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaluationAttitudeAssiduite",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaludationValidationGarde",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "evaluationPeriodique",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "eCOSM",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "total",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "isAbsenceSup10pc",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "isValide",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dureeStageComplEnSemaine",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dateDebutStageCompl",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateFinStageCompl",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "isStageComplValide",
+      "fieldType": "Boolean"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "stageRadiologie",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    }
+  ],
+  "entityTableName": "stage_radiologie",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210614223119"
+}
