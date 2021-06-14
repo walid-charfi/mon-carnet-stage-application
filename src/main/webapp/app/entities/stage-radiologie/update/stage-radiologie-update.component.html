@@ -1,0 +1,325 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-stage-radiologie-heading" data-cy="StageRadiologieCreateUpdateHeading">Create or edit a Stage Radiologie</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">Id</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_anneeEtude">Annee Etude</label>
+          <select class="form-control" name="anneeEtude" formControlName="anneeEtude" id="field_anneeEtude" data-cy="anneeEtude">
+            <option [ngValue]="null"></option>
+            <option value="DCEM1">DCEM1</option>
+            <option value="DCEM2">DCEM2</option>
+            <option value="DCEM3">DCEM3</option>
+          </select>
+          <div *ngIf="editForm.get('anneeEtude')!.invalid && (editForm.get('anneeEtude')!.dirty || editForm.get('anneeEtude')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('anneeEtude')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateDebut">Date Debut</label>
+          <div class="input-group">
+            <input
+              id="field_dateDebut"
+              data-cy="dateDebut"
+              type="text"
+              class="form-control"
+              name="dateDebut"
+              ngbDatepicker
+              #dateDebutDp="ngbDatepicker"
+              formControlName="dateDebut"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateDebutDp.toggle()">
+                <fa-icon icon="calendar-alt"></fa-icon>
+              </button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateFin">Date Fin</label>
+          <div class="input-group">
+            <input
+              id="field_dateFin"
+              data-cy="dateFin"
+              type="text"
+              class="form-control"
+              name="dateFin"
+              ngbDatepicker
+              #dateFinDp="ngbDatepicker"
+              formControlName="dateFin"
+            />
+            <span class="input-group-append">
+              <button type="button" class="btn btn-secondary" (click)="dateFinDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_hopital">Hopital</label>
+          <select class="form-control" name="hopital" formControlName="hopital" id="field_hopital" data-cy="hopital">
+            <option [ngValue]="null"></option>
+            <option value="CharlesNicoles">Charles Nicole</option>
+          </select>
+          <div *ngIf="editForm.get('hopital')!.invalid && (editForm.get('hopital')!.dirty || editForm.get('hopital')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('hopital')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_chefService">Chef Service</label>
+          <input
+            type="text"
+            class="form-control"
+            name="chefService"
+            id="field_chefService"
+            data-cy="chefService"
+            formControlName="chefService"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_semestre">Semestre</label>
+          <input type="text" class="form-control" name="semestre" id="field_semestre" data-cy="semestre" formControlName="semestre" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_groupe">Groupe</label>
+          <input type="text" class="form-control" name="groupe" id="field_groupe" data-cy="groupe" formControlName="groupe" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_objectif1">Objectif 1</label>
+          <input type="text" class="form-control" name="objectif1" id="field_objectif1" data-cy="objectif1" formControlName="objectif1" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_objectif1Enseigne">Objectif 1 Enseigne</label>
+          <input
+            type="text"
+            class="form-control"
+            name="objectif1Enseigne"
+            id="field_objectif1Enseigne"
+            data-cy="objectif1Enseigne"
+            formControlName="objectif1Enseigne"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isObjectif1Evalue">Is Objectif 1 Evalue</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isObjectif1Evalue"
+            id="field_isObjectif1Evalue"
+            data-cy="isObjectif1Evalue"
+            formControlName="isObjectif1Evalue"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_noteObjectif1">Note Objectif 1</label>
+          <input
+            type="number"
+            class="form-control"
+            name="noteObjectif1"
+            id="field_noteObjectif1"
+            data-cy="noteObjectif1"
+            formControlName="noteObjectif1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaluationObjectifParObjectif">Evaluation Objectif Par Objectif</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaluationObjectifParObjectif"
+            id="field_evaluationObjectifParObjectif"
+            data-cy="evaluationObjectifParObjectif"
+            formControlName="evaluationObjectifParObjectif"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaluationRedactionObservation">Evaluation Redaction Observation</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaluationRedactionObservation"
+            id="field_evaluationRedactionObservation"
+            data-cy="evaluationRedactionObservation"
+            formControlName="evaluationRedactionObservation"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaluationElaborationResume">Evaluation Elaboration Resume</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaluationElaborationResume"
+            id="field_evaluationElaborationResume"
+            data-cy="evaluationElaborationResume"
+            formControlName="evaluationElaborationResume"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaluationAttitudeAssiduite">Evaluation Attitude Assiduite</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaluationAttitudeAssiduite"
+            id="field_evaluationAttitudeAssiduite"
+            data-cy="evaluationAttitudeAssiduite"
+            formControlName="evaluationAttitudeAssiduite"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaludationValidationGarde">Evaludation Validation Garde</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaludationValidationGarde"
+            id="field_evaludationValidationGarde"
+            data-cy="evaludationValidationGarde"
+            formControlName="evaludationValidationGarde"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_evaluationPeriodique">Evaluation Periodique</label>
+          <input
+            type="number"
+            class="form-control"
+            name="evaluationPeriodique"
+            id="field_evaluationPeriodique"
+            data-cy="evaluationPeriodique"
+            formControlName="evaluationPeriodique"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_eCOSM">E COSM</label>
+          <input type="number" class="form-control" name="eCOSM" id="field_eCOSM" data-cy="eCOSM" formControlName="eCOSM" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_total">Total</label>
+          <input type="number" class="form-control" name="total" id="field_total" data-cy="total" formControlName="total" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isAbsenceSup10pc">Is Absence Sup 10 Pc</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isAbsenceSup10pc"
+            id="field_isAbsenceSup10pc"
+            data-cy="isAbsenceSup10pc"
+            formControlName="isAbsenceSup10pc"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isValide">Is Valide</label>
+          <input type="checkbox" class="form-check" name="isValide" id="field_isValide" data-cy="isValide" formControlName="isValide" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dureeStageComplEnSemaine">Duree Stage Compl En Semaine</label>
+          <input
+            type="number"
+            class="form-control"
+            name="dureeStageComplEnSemaine"
+            id="field_dureeStageComplEnSemaine"
+            data-cy="dureeStageComplEnSemaine"
+            formControlName="dureeStageComplEnSemaine"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateDebutStageCompl">Date Debut Stage Compl</label>
+          <div class="d-flex">
+            <input
+              id="field_dateDebutStageCompl"
+              data-cy="dateDebutStageCompl"
+              type="datetime-local"
+              class="form-control"
+              name="dateDebutStageCompl"
+              formControlName="dateDebutStageCompl"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateFinStageCompl">Date Fin Stage Compl</label>
+          <div class="d-flex">
+            <input
+              id="field_dateFinStageCompl"
+              data-cy="dateFinStageCompl"
+              type="datetime-local"
+              class="form-control"
+              name="dateFinStageCompl"
+              formControlName="dateFinStageCompl"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_isStageComplValide">Is Stage Compl Valide</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="isStageComplValide"
+            id="field_isStageComplValide"
+            data-cy="isStageComplValide"
+            formControlName="isStageComplValide"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="userOption.id === editForm.get('user')!.value?.id ? editForm.get('user')!.value : userOption"
+              *ngFor="let userOption of usersSharedCollection; trackBy: trackUserById"
+            >
+              {{ userOption.login }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<div>
+  <h2 id="page-heading" data-cy="StageRadiologieHeading">
+    <span>Stage Radiologies</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-stage-radiologie"
+        [routerLink]="['/stage-radiologie/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Stage Radiologie </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="stageRadiologies?.length === 0">
+    <span>No stageRadiologies found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="stageRadiologies && stageRadiologies.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="id"><span>Id</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="anneeEtude"><span>Annee Etude</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateDebut"><span>Date Debut</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateFin"><span>Date Fin</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="hopital"><span>Hopital</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="chefService"><span>Chef Service</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="semestre"><span>Semestre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="groupe"><span>Groupe</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="objectif1"><span>Objectif 1</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="objectif1Enseigne"><span>Objectif 1 Enseigne</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isObjectif1Evalue"><span>Is Objectif 1 Evalue</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="noteObjectif1"><span>Note Objectif 1</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="evaluationObjectifParObjectif">
+            <span>Evaluation Objectif Par Objectif</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaluationRedactionObservation">
+            <span>Evaluation Redaction Observation</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaluationElaborationResume">
+            <span>Evaluation Elaboration Resume</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaluationAttitudeAssiduite">
+            <span>Evaluation Attitude Assiduite</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaludationValidationGarde">
+            <span>Evaludation Validation Garde</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaluationPeriodique"><span>Evaluation Periodique</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="eCOSM"><span>E COSM</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="total"><span>Total</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isAbsenceSup10pc"><span>Is Absence Sup 10 Pc</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isValide"><span>Is Valide</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dureeStageComplEnSemaine">
+            <span>Duree Stage Compl En Semaine</span> <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateDebutStageCompl"><span>Date Debut Stage Compl</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="dateFinStageCompl"><span>Date Fin Stage Compl</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isStageComplValide"><span>Is Stage Compl Valide</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="user.login"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stageRadiologie of stageRadiologies; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/stage-radiologie', stageRadiologie.id, 'view']">{{ stageRadiologie.id }}</a>
+          </td>
+          <td>{{ stageRadiologie.anneeEtude }}</td>
+          <td>{{ stageRadiologie.dateDebut | formatMediumDate }}</td>
+          <td>{{ stageRadiologie.dateFin | formatMediumDate }}</td>
+          <td>{{ stageRadiologie.hopital }}</td>
+          <td>{{ stageRadiologie.chefService }}</td>
+          <td>{{ stageRadiologie.semestre }}</td>
+          <td>{{ stageRadiologie.groupe }}</td>
+          <td>{{ stageRadiologie.objectif1 }}</td>
+          <td>{{ stageRadiologie.objectif1Enseigne }}</td>
+          <td>{{ stageRadiologie.isObjectif1Evalue }}</td>
+          <td>{{ stageRadiologie.noteObjectif1 }}</td>
+          <td>{{ stageRadiologie.evaluationObjectifParObjectif }}</td>
+          <td>{{ stageRadiologie.evaluationRedactionObservation }}</td>
+          <td>{{ stageRadiologie.evaluationElaborationResume }}</td>
+          <td>{{ stageRadiologie.evaluationAttitudeAssiduite }}</td>
+          <td>{{ stageRadiologie.evaludationValidationGarde }}</td>
+          <td>{{ stageRadiologie.evaluationPeriodique }}</td>
+          <td>{{ stageRadiologie.eCOSM }}</td>
+          <td>{{ stageRadiologie.total }}</td>
+          <td>{{ stageRadiologie.isAbsenceSup10pc }}</td>
+          <td>{{ stageRadiologie.isValide }}</td>
+          <td>{{ stageRadiologie.dureeStageComplEnSemaine }}</td>
+          <td>{{ stageRadiologie.dateDebutStageCompl | formatMediumDatetime }}</td>
+          <td>{{ stageRadiologie.dateFinStageCompl | formatMediumDatetime }}</td>
+          <td>{{ stageRadiologie.isStageComplValide }}</td>
+          <td>
+            {{ stageRadiologie.user?.login }}
+          </td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/stage-radiologie', stageRadiologie.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/stage-radiologie', stageRadiologie.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(stageRadiologie)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="stageRadiologies && stageRadiologies.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
