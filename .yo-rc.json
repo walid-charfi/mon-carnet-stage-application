@@ -42,7 +42,9 @@
     "jwtSecretKey": "ODM0OWE0MzRmODRiOGY0YjJmYWE5MmRiMzA3ZTUyMGNhMzNlZmQ2M2M2OTA2YTljN2ViY2ExMDNhNGM1YzIwYzJhOGI3MGNjOGFjNWQ0MWVhMDliMTgyOWM1MDYxNmQ0YjJhY2UzYTBlMmRlZjdmMmRmN2Y0NTM5MmE4MTM4Njc=",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "reactive": false
+    "reactive": false,
+    "entities": ["StageRadiologie"],
+    "lastLiquibaseTimestamp": 1624306464000
   },
   "git-provider": "GitHub",
   "git-company": "xinorya",
