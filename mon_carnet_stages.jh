@@ -1,0 +1,37 @@
+enum AnneeEtude {
+  DCEM1,
+  DCEM2,
+  DCEM3
+}
+
+enum Hopital {
+	CharlesNicolle("Charles Nicolle"),
+    MongiSlim("Mongi Slim"),
+    HabibThameur("Habib Thameur"),
+    AzizaOthmana("Aziza Othmana"),
+    LaRabta("La Rabta"),
+    SalahAzaiez("Salah Azaiez"),
+    HopitalEnfants("Hôpital d'Enfants"),
+    Razi("Razi")
+}
+
+entity StageRadiologie {
+	id Long,
+    anneeEtude AnneeEtude required,
+	dateDebut LocalDate,
+	dateFin LocalDate,
+    hopital Hopital required,
+    chefService String,
+    semestre String,
+    groupe String,
+    objectif1 String,
+    objectif1Enseigne String,
+    noteObjectif1 Integer
+}
+
+relationship ManyToOne {
+  StageRadiologie{user(login)} to User
+}
+
+// Set pagination options
+paginate StageRadiologie with pagination
