@@ -3,17 +3,19 @@
     <div class="col-md-8">
       <h1 data-cy="registerTitle">Registration</h1>
 
-      <div class="alert alert-success" *ngIf="success"><strong>Registration saved!</strong> Please check your email for confirmation.</div>
-
-      <div class="alert alert-danger" *ngIf="error"><strong>Registration failed!</strong> Please try again later.</div>
-
-      <div class="alert alert-danger" *ngIf="errorUserExists">
-        <strong>Login name already registered!</strong> Please choose another one.
+      <div class="alert alert-success" *ngIf="success">
+        <strong>Inscription réussie!</strong> Veuillez vérifier votre boîte mail pour activer votre compte.
       </div>
 
-      <div class="alert alert-danger" *ngIf="errorEmailExists"><strong>Email is already in use!</strong> Please choose another one.</div>
+      <div class="alert alert-danger" *ngIf="error"><strong>Oops, l'inscription n'a pas abouti!</strong> Merci d'essayer plus tad.</div>
 
-      <div class="alert alert-danger" *ngIf="doNotMatch">The password and its confirmation do not match!</div>
+      <div class="alert alert-danger" *ngIf="errorUserExists">
+        <strong>Le login est déjà enregistré!</strong> Veuillez vous connecter ou saisir un autre login.
+      </div>
+
+      <div class="alert alert-danger" *ngIf="errorEmailExists"><strong>L'email est déjà utilisé!</strong> Veuillez en saisir un autre.</div>
+
+      <div class="alert alert-danger" *ngIf="doNotMatch">Le mot de passe et sa confirmation sont différents!</div>
     </div>
   </div>
 
@@ -21,7 +23,7 @@
     <div class="col-md-8">
       <form name="form" role="form" (ngSubmit)="register()" [formGroup]="registerForm" *ngIf="!success">
         <div class="form-group">
-          <label class="form-control-label" for="login">Username</label>
+          <label class="form-control-label" for="login">Login</label>
           <input
             type="text"
             class="form-control"
@@ -34,7 +36,7 @@
           />
 
           <div *ngIf="registerForm.get('login')!.invalid && (registerForm.get('login')!.dirty || registerForm.get('login')!.touched)">
-            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.required"> Your username is required. </small>
+            <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.required"> Votre login est requis. </small>
 
             <small class="form-text text-danger" *ngIf="registerForm.get('login')?.errors?.minlength">
               Your username is required to be at least 1 character.
@@ -140,15 +142,6 @@
 
         <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary" data-cy="submit">Register</button>
       </form>
-
-      <div class="mt-3 alert alert-warning">
-        <span>If you want to </span>
-        <a class="alert-link" routerLink="/login">sign in</a
-        ><span
-          >, you can try the default accounts:<br />- Administrator (login="admin" and password="admin") <br />- User (login="user" and
-          password="user").</span
-        >
-      </div>
     </div>
   </div>
 </div>

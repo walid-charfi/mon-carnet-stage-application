@@ -48,6 +48,7 @@ public class CacheConfiguration {
             createCache(cm, com.fm.mcs.domain.User.class.getName());
             createCache(cm, com.fm.mcs.domain.Authority.class.getName());
             createCache(cm, com.fm.mcs.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.fm.mcs.domain.StageRadiologie.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

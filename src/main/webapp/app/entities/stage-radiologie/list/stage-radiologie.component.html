@@ -1,0 +1,140 @@
+<div>
+  <h2 id="page-heading" data-cy="StageRadiologieHeading">
+    <span>Stage Radiologies</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Rafrâchir la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-stage-radiologie"
+        [routerLink]="['/stage-radiologie/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Créer un stage en Radiologie </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="stageRadiologies?.length === 0">
+    <span>No stageRadiologies found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="stageRadiologies && stageRadiologies.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+          <th scope="col" jhiSortBy="user.lastName">
+            <span>Etudiant</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anneeEtude">
+            <span>Annee Etude</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateDebut">
+            <span>Date Début</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateFin">
+            <span>Date Fin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="hopital">
+            <span>Hôpital</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="chefService">
+            <span>Chef Service</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="semestre">
+            <span>Semestre</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="groupe">
+            <span>Groupe</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="evaluationObjectif1Etudiant">
+            <span>Enseigné</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="noteObjectif1EncadrantReferent" *jhiHasAnyAuthority="'ROLE_ENCADRANT_REFERENT'">
+            <span>Evalué</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stageRadiologie of stageRadiologies; trackBy: trackId" data-cy="entityTable">
+          <td>{{ stageRadiologie.user?.firstName }} {{ stageRadiologie.user?.lastName }}</td>
+          <td>{{ stageRadiologie.anneeEtude }}</td>
+          <td>{{ stageRadiologie.dateDebut | formatMediumDate }}</td>
+          <td>{{ stageRadiologie.dateFin | formatMediumDate }}</td>
+          <td>{{ stageRadiologie.hopital }}</td>
+          <td>{{ stageRadiologie.chefService }}</td>
+          <td>{{ stageRadiologie.semestre }}</td>
+          <td>{{ stageRadiologie.groupe }}</td>
+          <td>{{ stageRadiologie.evaluationObjectif1Etudiant }}</td>
+          <td *jhiHasAnyAuthority="'ROLE_ENCADRANT_REFERENT'">{{ stageRadiologie.noteObjectif1EncadrantReferent }}</td>
+          <td class="text-right">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/stage-radiologie', stageRadiologie.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">Voir</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/stage-radiologie', stageRadiologie.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Modifier</span>
+              </button>
+
+              <button type="submit" (click)="delete(stageRadiologie)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">supprimer</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="stageRadiologies && stageRadiologies.length > 0">
+    <div class="row justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="row justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

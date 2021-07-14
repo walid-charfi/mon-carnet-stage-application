@@ -1,0 +1,70 @@
+{
+  "name": "StageRadiologie",
+  "fields": [
+    {
+      "fieldName": "id",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "anneeEtude",
+      "fieldType": "AnneeEtude",
+      "fieldValues": "DCEM1,DCEM2,DCEM3",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateDebut",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateFin",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "hopital",
+      "fieldType": "Hopital",
+      "fieldValues": "CharlesNicolle (Charles Nicolle),MongiSlim (Mongi Slim),HabibThameur (Habib Thameur),AzizaOthmana (Aziza Othmana),LaRabta (La Rabta),SalahAzaiez (Salah Azaiez),HopitalEnfants (Hôpital d'Enfants),Razi (Razi)",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "chefService",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "semestre",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "groupe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "evaluationObjectif1Etudiant",
+      "fieldType": "EvaluationEtudiant",
+      "fieldValues": "NoDemo (Pas de démonstration),Simule (Simulé),Realise (Réalisé)"
+    },
+    {
+      "fieldName": "noteObjectif1EncadrantReferent",
+      "fieldType": "NoteEncadrantReferent",
+      "fieldValues": "NonAcquis (Non acquis),EnCoursAquisition (En cours d’acquisition),Acquis (Acquis)"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "stageRadiologie",
+      "relationshipName": "user",
+      "otherEntityField": "login"
+    }
+  ],
+  "entityTableName": "stage_radiologie",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210621201424"
+}
