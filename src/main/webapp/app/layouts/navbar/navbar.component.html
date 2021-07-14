@@ -1,7 +1,7 @@
 <nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
     <span class="logo-img"></span>
-    <span class="navbar-title">MonCarnetDeStage</span>
+    <span class="navbar-title">Mon Carnet de stages</span>
     <span class="navbar-version">{{ version }}</span>
   </a>
   <a
@@ -22,7 +22,7 @@
         <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
           <span>
             <fa-icon icon="home"></fa-icon>
-            <span>Home</span>
+            <span>Accueil</span>
           </span>
         </a>
       </li>
@@ -38,7 +38,7 @@
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu" data-cy="entity">
           <span>
             <fa-icon icon="th-list"></fa-icon>
-            <span>Entities</span>
+            <span>Carnet de stages</span>
           </span>
         </a>
         <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
@@ -127,7 +127,7 @@
         <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
           <span *ngIf="!getImageUrl()">
             <fa-icon icon="user"></fa-icon>
-            <span>Account</span>
+            <span>Compte</span>
           </span>
           <span *ngIf="getImageUrl()">
             <img [src]="getImageUrl()" class="profile-image rounded-circle" alt="Avatar" />
@@ -137,7 +137,7 @@
           <li *ngSwitchCase="true">
             <a class="dropdown-item" routerLink="account/settings" routerLinkActive="active" (click)="collapseNavbar()" data-cy="settings">
               <fa-icon icon="wrench" [fixedWidth]="true"></fa-icon>
-              <span>Settings</span>
+              <span>Paramètres</span>
             </a>
           </li>
           <li *ngSwitchCase="true">
@@ -149,25 +149,25 @@
               data-cy="passwordItem"
             >
               <fa-icon icon="lock" [fixedWidth]="true"></fa-icon>
-              <span>Password</span>
+              <span>Mot de passe</span>
             </a>
           </li>
           <li *ngSwitchCase="true">
             <a class="dropdown-item" (click)="logout()" id="logout" data-cy="logout">
               <fa-icon icon="sign-out-alt" [fixedWidth]="true"></fa-icon>
-              <span>Sign out</span>
+              <span>Se déconnecter</span>
             </a>
           </li>
           <li *ngSwitchCase="false">
             <a class="dropdown-item" (click)="login()" id="login" data-cy="login">
               <fa-icon icon="sign-in-alt" [fixedWidth]="true"></fa-icon>
-              <span>Sign in</span>
+              <span>Se connecter</span>
             </a>
           </li>
           <li *ngSwitchCase="false">
             <a class="dropdown-item" routerLink="account/register" routerLinkActive="active" (click)="collapseNavbar()" data-cy="register">
               <fa-icon icon="user-plus" [fixedWidth]="true"></fa-icon>
-              <span>Register</span>
+              <span>Créer un compte</span>
             </a>
           </li>
         </ul>

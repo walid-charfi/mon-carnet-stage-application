@@ -1,18 +1,15 @@
 <div class="row justify-content-center">
   <div class="col-8">
     <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
-      <h2 id="jhi-stage-radiologie-heading" data-cy="StageRadiologieCreateUpdateHeading">Create or edit a Stage Radiologie</h2>
+      <h2 id="jhi-stage-radiologie-heading" data-cy="StageRadiologieCreateUpdateHeading">Editer un stage en Radiologie</h2>
 
       <div>
         <jhi-alert-error></jhi-alert-error>
-
-        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
-          <label class="form-control-label" for="field_id">Id</label>
-          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
-        </div>
-
+        <br />
+        <h4>Etudiant : {{ editForm.get('user')!.value?.firstName }} {{ editForm.get('user')!.value?.lastName }}</h4>
+        <br />
         <div class="form-group">
-          <label class="form-control-label" for="field_anneeEtude">Annee Etude</label>
+          <label class="form-control-label" for="field_anneeEtude">Année d'étude</label>
           <select class="form-control" name="anneeEtude" formControlName="anneeEtude" id="field_anneeEtude" data-cy="anneeEtude">
             <option [ngValue]="null"></option>
             <option value="DCEM1">DCEM1</option>
@@ -25,7 +22,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_dateDebut">Date Debut</label>
+          <label class="form-control-label" for="field_dateDebut">Date de début</label>
           <div class="input-group">
             <input
               id="field_dateDebut"
@@ -46,7 +43,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_dateFin">Date Fin</label>
+          <label class="form-control-label" for="field_dateFin">Date de fin</label>
           <div class="input-group">
             <input
               id="field_dateFin"
@@ -65,7 +62,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_hopital">Hopital</label>
+          <label class="form-control-label" for="field_hopital">Hôpital</label>
           <select class="form-control" name="hopital" formControlName="hopital" id="field_hopital" data-cy="hopital">
             <option [ngValue]="null"></option>
             <option value="CharlesNicolle">Charles Nicolle</option>
@@ -83,7 +80,7 @@
         </div>
 
         <div class="form-group">
-          <label class="form-control-label" for="field_chefService">Chef Service</label>
+          <label class="form-control-label" for="field_chefService">Chef de Service</label>
           <input
             type="text"
             class="form-control"
@@ -104,8 +101,17 @@
           <input type="text" class="form-control" name="groupe" id="field_groupe" data-cy="groupe" formControlName="groupe" />
         </div>
 
+        <div><b>Objectifs relatifs à l'habileté technique :</b></div>
+        <br />
+        <div>
+          <b>1.</b> Relever, à partir de l’interrogatoire du patient et des renseignements fournis par le clinicien :<br />
+          -les risques liés à l’utilisation des rayons X,<br />
+          -les risques liés à l’utilisation des produits de contraste iodés et gadolinés,<br />
+          -les contre indications à la réalisation d’une IRM.<br />
+        </div>
+        <br />
         <div class="form-group">
-          <label class="form-control-label" for="field_evaluationObjectif1Etudiant">Evaluation Objectif 1 Etudiant</label>
+          <label class="form-control-label" for="field_evaluationObjectif1Etudiant"> Enseigné : </label>
           <select
             class="form-control"
             name="evaluationObjectif1Etudiant"
@@ -120,8 +126,8 @@
           </select>
         </div>
 
-        <div class="form-group">
-          <label class="form-control-label" for="field_noteObjectif1EncadrantReferent">Note Objectif 1 Encadrant Referent</label>
+        <div class="form-group" *jhiHasAnyAuthority="'ROLE_ENCADRANT_REFERENT'">
+          <label class="form-control-label" for="field_noteObjectif1EncadrantReferent">Note</label>
           <select
             class="form-control"
             name="noteObjectif1EncadrantReferent"
@@ -152,7 +158,7 @@
 
       <div>
         <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Annuler</span>
         </button>
 
         <button
@@ -162,7 +168,7 @@
           [disabled]="editForm.invalid || isSaving"
           class="btn btn-primary"
         >
-          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Enregistrer</span>
         </button>
       </div>
     </form>

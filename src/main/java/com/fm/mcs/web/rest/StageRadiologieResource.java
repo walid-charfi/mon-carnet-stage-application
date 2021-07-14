@@ -1,13 +1,18 @@
 package com.fm.mcs.web.rest;
 
+import com.fm.mcs.domain.Authority;
 import com.fm.mcs.domain.StageRadiologie;
 import com.fm.mcs.repository.StageRadiologieRepository;
+import com.fm.mcs.security.AuthoritiesConstants;
+import com.fm.mcs.service.UserService;
 import com.fm.mcs.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import org.slf4j.Logger;
@@ -16,7 +21,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +45,11 @@ public class StageRadiologieResource {
     private String applicationName;
 
     private final StageRadiologieRepository stageRadiologieRepository;
+    private final UserService userService;
 
-    public StageRadiologieResource(StageRadiologieRepository stageRadiologieRepository) {
+    public StageRadiologieResource(StageRadiologieRepository stageRadiologieRepository, UserService userService) {
         this.stageRadiologieRepository = stageRadiologieRepository;
+        this.userService = userService;
     }
 
     /**
@@ -70,7 +76,7 @@ public class StageRadiologieResource {
     /**
      * {@code PUT  /stage-radiologies/:id} : Updates an existing stageRadiologie.
      *
-     * @param id the id of the stageRadiologie to save.
+     * @param id              the id of the stageRadiologie to save.
      * @param stageRadiologie the stageRadiologie to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated stageRadiologie,
      * or with status {@code 400 (Bad Request)} if the stageRadiologie is not valid,
@@ -104,7 +110,7 @@ public class StageRadiologieResource {
     /**
      * {@code PATCH  /stage-radiologies/:id} : Partial updates given fields of an existing stageRadiologie, field will ignore if it is null
      *
-     * @param id the id of the stageRadiologie to save.
+     * @param id              the id of the stageRadiologie to save.
      * @param stageRadiologie the stageRadiologie to update.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated stageRadiologie,
      * or with status {@code 400 (Bad Request)} if the stageRadiologie is not valid,
@@ -181,7 +187,23 @@ public class StageRadiologieResource {
     @GetMapping("/stage-radiologies")
     public ResponseEntity<List<StageRadiologie>> getAllStageRadiologies(Pageable pageable) {
         log.debug("REST request to get a page of StageRadiologies");
-        Page<StageRadiologie> page = stageRadiologieRepository.findAll(pageable);
+        Page<StageRadiologie> page = null;
+        Set<String> authorities = userService
+            .getUserWithAuthorities()
+            .get()
+            .getAuthorities()
+            .stream()
+            .map(Authority::getName)
+            .collect(Collectors.toSet());
+        if (
+            authorities.contains(AuthoritiesConstants.ADMIN) ||
+            authorities.contains(AuthoritiesConstants.DIRECTION_STAGE) ||
+            authorities.contains(AuthoritiesConstants.ENCADRANT_REFERENT)
+        ) {
+            page = stageRadiologieRepository.findAll(pageable);
+        } else {
+            page = stageRadiologieRepository.findByUserIsCurrentUser(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

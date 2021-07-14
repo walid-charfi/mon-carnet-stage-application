@@ -46,12 +46,18 @@ spring:
     database-platform: tech.jhipster.domain.util.FixedH2Dialect
   liquibase:
     # Remove 'faker' if you do not want the sample data to be loaded automatically
-    contexts: dev, faker
+    contexts: dev
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: in-v3.mailjet.com
+    port: 587
+    username: feb6f3c94bcbb6ce84c9336ac05d0128
+    password: 33046dd368109b2a2a2771f4b3d42368
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: in-v3.mailjet.com
   messages:
     cache-duration: PT1S # 1 second, see the ISO 8601 standard
   thymeleaf:

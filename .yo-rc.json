@@ -44,7 +44,10 @@
     "clientThemeVariant": "",
     "reactive": false,
     "entities": ["StageRadiologie"],
-    "lastLiquibaseTimestamp": 1624306464000
+    "lastLiquibaseTimestamp": 1624306464000,
+    "herokuAppName": "mon-carnet-de-stage",
+    "herokuDeployType": "jar",
+    "herokuJavaVersion": "11"
   },
   "git-provider": "GitHub",
   "git-company": "xinorya",

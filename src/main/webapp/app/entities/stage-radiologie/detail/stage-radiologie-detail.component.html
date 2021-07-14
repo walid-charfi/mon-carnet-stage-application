@@ -10,15 +10,15 @@
       <jhi-alert></jhi-alert>
 
       <dl class="row-md jh-entity-details">
-        <dt><span>Id</span></dt>
+        <dt><span>Etudiant</span></dt>
         <dd>
-          <span>{{ stageRadiologie.id }}</span>
+          <span>{{ stageRadiologie.user?.firstName }} {{ stageRadiologie.user?.lastName }}</span>
         </dd>
-        <dt><span>Annee Etude</span></dt>
+        <dt><span>Année d'étude</span></dt>
         <dd>
           <span>{{ stageRadiologie.anneeEtude }}</span>
         </dd>
-        <dt><span>Date Debut</span></dt>
+        <dt><span>Date Début</span></dt>
         <dd>
           <span>{{ stageRadiologie.dateDebut | formatMediumDate }}</span>
         </dd>
@@ -26,7 +26,7 @@
         <dd>
           <span>{{ stageRadiologie.dateFin | formatMediumDate }}</span>
         </dd>
-        <dt><span>Hopital</span></dt>
+        <dt><span>Hôpital</span></dt>
         <dd>
           <span>{{ stageRadiologie.hopital }}</span>
         </dd>
@@ -42,17 +42,13 @@
         <dd>
           <span>{{ stageRadiologie.groupe }}</span>
         </dd>
-        <dt><span>Evaluation Objectif 1 Etudiant</span></dt>
+        <dt><span>Enseigné</span></dt>
         <dd>
           <span>{{ stageRadiologie.evaluationObjectif1Etudiant }}</span>
         </dd>
-        <dt><span>Note Objectif 1 Encadrant Referent</span></dt>
+        <dt><span>Evalué</span></dt>
         <dd>
           <span>{{ stageRadiologie.noteObjectif1EncadrantReferent }}</span>
-        </dd>
-        <dt><span>User</span></dt>
-        <dd>
-          <span>{{ stageRadiologie.user?.login }}</span>
         </dd>
       </dl>
 
@@ -61,7 +57,7 @@
       </button>
 
       <button type="button" [routerLink]="['/stage-radiologie', stageRadiologie.id, 'edit']" class="btn btn-primary">
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Modifier</span>
       </button>
     </div>
   </div>

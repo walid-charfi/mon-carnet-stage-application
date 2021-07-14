@@ -6,7 +6,7 @@ package com.fm.mcs.domain.enumeration;
 public enum NoteEncadrantReferent {
     NonAcquis("Non acquis"),
     EnCoursAquisition("En cours d’acquisition"),
-    Acquis;
+    Acquis("Acquis");
 
     private final String value;
 

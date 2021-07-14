@@ -12,9 +12,9 @@
       <a th:with="url=(@{|${baseUrl}/account/activate?key=${user.activationKey}|})" th:href="${url}" th:text="${url}">Activation link</a>
     </p>
     <p>
-      <span th:text="#{email.activation.text2}">Regards, </span>
+      <span th:text="#{email.activation.text2}">Cordialement, </span>
       <br />
-      <em th:text="#{email.signature}">JHipster.</em>
+      <em th:text="#{email.signature}">Mon Carnet Se Stage Team.</em>
     </p>
   </body>
 </html>

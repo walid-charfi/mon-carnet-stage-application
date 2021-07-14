@@ -5,7 +5,7 @@
     <div class="d-flex justify-content-end">
       <button class="btn btn-info mr-2" (click)="loadPage()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span>Refresh List</span>
+        <span>Rafrâchir la liste</span>
       </button>
 
       <button
@@ -15,7 +15,7 @@
         [routerLink]="['/stage-radiologie/new']"
       >
         <fa-icon icon="plus"></fa-icon>
-        <span> Create a new Stage Radiologie </span>
+        <span> Créer un stage en Radiologie </span>
       </button>
     </div>
   </h2>
@@ -32,29 +32,52 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-          <th scope="col" jhiSortBy="id"><span>Id</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="anneeEtude"><span>Annee Etude</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dateDebut"><span>Date Debut</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="dateFin"><span>Date Fin</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="hopital"><span>Hopital</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="chefService"><span>Chef Service</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="semestre"><span>Semestre</span> <fa-icon icon="sort"></fa-icon></th>
-          <th scope="col" jhiSortBy="groupe"><span>Groupe</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="user.lastName">
+            <span>Etudiant</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="anneeEtude">
+            <span>Annee Etude</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateDebut">
+            <span>Date Début</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="dateFin">
+            <span>Date Fin</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="hopital">
+            <span>Hôpital</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="chefService">
+            <span>Chef Service</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="semestre">
+            <span>Semestre</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
+          <th scope="col" jhiSortBy="groupe">
+            <span>Groupe</span>
+            <fa-icon icon="sort"></fa-icon>
+          </th>
           <th scope="col" jhiSortBy="evaluationObjectif1Etudiant">
-            <span>Evaluation Objectif 1 Etudiant</span> <fa-icon icon="sort"></fa-icon>
+            <span>Enseigné</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="noteObjectif1EncadrantReferent">
-            <span>Note Objectif 1 Encadrant Referent</span> <fa-icon icon="sort"></fa-icon>
+          <th scope="col" jhiSortBy="noteObjectif1EncadrantReferent" *jhiHasAnyAuthority="'ROLE_ENCADRANT_REFERENT'">
+            <span>Evalué</span>
+            <fa-icon icon="sort"></fa-icon>
           </th>
-          <th scope="col" jhiSortBy="user.login"><span>User</span> <fa-icon icon="sort"></fa-icon></th>
           <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let stageRadiologie of stageRadiologies; trackBy: trackId" data-cy="entityTable">
-          <td>
-            <a [routerLink]="['/stage-radiologie', stageRadiologie.id, 'view']">{{ stageRadiologie.id }}</a>
-          </td>
+          <td>{{ stageRadiologie.user?.firstName }} {{ stageRadiologie.user?.lastName }}</td>
           <td>{{ stageRadiologie.anneeEtude }}</td>
           <td>{{ stageRadiologie.dateDebut | formatMediumDate }}</td>
           <td>{{ stageRadiologie.dateFin | formatMediumDate }}</td>
@@ -63,10 +86,7 @@
           <td>{{ stageRadiologie.semestre }}</td>
           <td>{{ stageRadiologie.groupe }}</td>
           <td>{{ stageRadiologie.evaluationObjectif1Etudiant }}</td>
-          <td>{{ stageRadiologie.noteObjectif1EncadrantReferent }}</td>
-          <td>
-            {{ stageRadiologie.user?.login }}
-          </td>
+          <td *jhiHasAnyAuthority="'ROLE_ENCADRANT_REFERENT'">{{ stageRadiologie.noteObjectif1EncadrantReferent }}</td>
           <td class="text-right">
             <div class="btn-group">
               <button
@@ -76,7 +96,7 @@
                 data-cy="entityDetailsButton"
               >
                 <fa-icon icon="eye"></fa-icon>
-                <span class="d-none d-md-inline">View</span>
+                <span class="d-none d-md-inline">Voir</span>
               </button>
 
               <button
@@ -86,12 +106,12 @@
                 data-cy="entityEditButton"
               >
                 <fa-icon icon="pencil-alt"></fa-icon>
-                <span class="d-none d-md-inline">Edit</span>
+                <span class="d-none d-md-inline">Modifier</span>
               </button>
 
               <button type="submit" (click)="delete(stageRadiologie)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
                 <fa-icon icon="times"></fa-icon>
-                <span class="d-none d-md-inline">Delete</span>
+                <span class="d-none d-md-inline">supprimer</span>
               </button>
             </div>
           </td>

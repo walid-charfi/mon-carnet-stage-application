@@ -11,7 +11,7 @@ public enum Hopital {
     LaRabta("La Rabta"),
     SalahAzaiez("Salah Azaiez"),
     HopitalEnfants("Hôpital d&#39;Enfants"),
-    Razi;
+    Razi("Razi");
 
     private final String value;
 
